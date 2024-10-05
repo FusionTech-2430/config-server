@@ -44,7 +44,6 @@ firebase:
 
 spring:
   datasource:
-    url: '{cipher}f69d8a4202c98cb3b4ef41d065c4456e125b7601a20096ec389d33f40417b376a76c6d7ee050c6f3a52531f5bcf4a4a14f108eb68246f93c0ffcfce9d597948f46156305a70d90d170637c2c6ee0010bf9e4f7c3c73e5f57dcfb259dd5e45092'
     username: '{cipher}31ac3935e5cfddaf0df10d47a34d999414072fcb89f7fb9a29948f2f853db8f7'
     password: '{cipher}a6b8b805b4b0fef68a803b9334697672f79eeb80bb9a29f01c188b15dac6675b'
     driver-class-name: org.postgresql.Driver
