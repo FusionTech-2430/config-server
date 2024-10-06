@@ -1,0 +1,6 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://10.43.101.72:8761/eureka}
+  instance:
+    ip-address: 10.43.101.55
