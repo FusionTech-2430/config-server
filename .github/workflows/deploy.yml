@@ -6,7 +6,7 @@ on:
     branches: ["main"]
   workflow_dispatch:
 jobs:
-  deploy:
+  deploy-develop:
     name: Deploy
     runs-on: self-hosted
     steps:
@@ -26,5 +26,49 @@ jobs:
             echo "Building Docker image..."
             docker build -t ${{ github.event.repository.name }} .
             docker rm -f ${{ github.event.repository.name }}
-            docker run --name ${{ github.event.repository.name }} --network all_connected -d -p 8888:8888 --env-file .env ${{ github.event.repository.name }}
+            docker run --name ${{ github.event.repository.name }} --network all_connected -d -p 8888:8888 ${{ github.event.repository.name }}
             echo "Docker container running..."
+  deploy-qa:
+      name: Deploy
+      runs-on: self-hosted
+      steps:
+        - name: executing remote ssh commands using ssh key
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.QA_INTEG_HOST }}
+            username: ${{ secrets.HOSTS_USERNAME }}
+            key: ${{ secrets.QA_INTEG_SSH_KEY }}
+            port: ${{ secrets.SSH_PORT }}
+            script: |
+              cd AllConnected/${{ github.event.repository.name }}
+              echo "Fetching latest code..."
+              git fetch
+              git checkout main
+              git pull
+              echo "Building Docker image..."
+              docker build -t ${{ github.event.repository.name }} .
+              docker rm -f ${{ github.event.repository.name }}
+              docker run --name ${{ github.event.repository.name }} --network all_connected -d -p 8888:8888 ${{ github.event.repository.name }}
+              echo "Docker container running..."
+  deploy-prod:
+      name: Deploy
+      runs-on: self-hosted
+      steps:
+        - name: executing remote ssh commands using ssh key
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.PROD_INTEG_HOST }}
+            username: ${{ secrets.HOSTS_USERNAME }}
+            key: ${{ secrets.PROD_INTEG_SSH_KEY }}
+            port: ${{ secrets.SSH_PORT }}
+            script: |
+              cd AllConnected/${{ github.event.repository.name }}
+              echo "Fetching latest code..."
+              git fetch
+              git checkout main
+              git pull
+              echo "Building Docker image..."
+              docker build -t ${{ github.event.repository.name }} .
+              docker rm -f ${{ github.event.repository.name }}
+              docker run --name ${{ github.event.repository.name }} --network all_connected -d -p 8888:8888 ${{ github.event.repository.name }}
+              echo "Docker container running..."
