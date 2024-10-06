@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 jobs:
   deploy-develop:
-    name: Deploy
+    name: Deploy on Develop
     runs-on: self-hosted
     steps:
       - name: executing remote ssh commands using ssh key
@@ -29,7 +29,7 @@ jobs:
             docker run --name ${{ github.event.repository.name }} --network all_connected -d -p 8888:8888 ${{ github.event.repository.name }}
             echo "Docker container running..."
   deploy-qa:
-      name: Deploy
+      name: Deploy on QA
       runs-on: self-hosted
       steps:
         - name: executing remote ssh commands using ssh key
@@ -51,7 +51,7 @@ jobs:
               docker run --name ${{ github.event.repository.name }} --network all_connected -d -p 8888:8888 ${{ github.event.repository.name }}
               echo "Docker container running..."
   deploy-prod:
-      name: Deploy
+      name: Deploy on Prod
       runs-on: self-hosted
       steps:
         - name: executing remote ssh commands using ssh key
