@@ -11,8 +11,7 @@ spring:
   cloud:
     config:
       server:
-       
-
+      
         enabled: true
         native:
           search-locations:
@@ -30,6 +29,7 @@ eureka:
   instance:
     # To avoid using DNS
     prefer-ip-address: true
+
 
 # Actuator
 management:

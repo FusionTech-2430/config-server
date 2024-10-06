@@ -3,12 +3,8 @@ eureka:
   client:
     # To report to Eureka when this service is up discovery-service
     registerWithEureka: true
-    # Eureka server URL
-    service-url:
-      defaultZone: ${EUREKA_SERVER_URL:http://10.43.101.114:8761/eureka}
   instance:
     prefer-ip-address: true
-    ip-address: 10.43.100.241
     lease-renewal-interval-in-seconds: 10
     lease-expiration-duration-in-seconds: 30
 
