@@ -1,3 +1,7 @@
 spring:
   datasource:
     url: 'jdbc:postgresql://postgres_primary:5432/services'
+
+eureka:
+  instance:
+    non-secure-port: 8092
